@@ -14,15 +14,15 @@ FILES    = pt_PT.aff pt_PT.dic
 #
 # Fetching the pt_PT files from the Natura project.
 #
-PT_FNAME = oo3x-pt-PT.oxt
-PT_DIR = http://extensions.services.openoffice.org/e-files/1196/5/$(PT_FNAME)
+PT_FNAME = 18337
+PT_DIR = http://extensions.openoffice.org/en/download/$(PT_FNAME)
 :attr {fetch = $PT_DIR} $PT_FNAME
 
 #
 # Fetching the pt_BR files from BrOffice.org (Brazilian OOo).
 #
-BR_FNAME = Vero_pt_BR_V207AOC.oxt
-BR_DIR = http://www.broffice.org/files/$(BR_FNAME)
+BR_FNAME = vero_pt_br_v212aoc.oxt
+BR_DIR = http://extensions.libreoffice.org/extension-center/vero-verificador-ortografico-e-hifenizador-em-portugues-do-brasil/pscreleasefolder.2012-01-04.1563120832/2.1.2/$(BR_FNAME)
 :attr {fetch = $BR_DIR} $BR_FNAME
 
 all: $SPELLDIR/pt.latin1.spl $SPELLDIR/pt.utf-8.spl \
@@ -59,6 +59,7 @@ pt_PT.aff pt_PT.dic: {buildcheck=}
         :delete {f} description.xml
         :delete {f} dictionaries.xcu
         :delete {f} LICENSES.txt
+        :delete {f} icon.png
         # Remove grammer items and the duplicates this causes
         :sys $VIM pt_PT.dic -u NONE -e -c "%s/\t.*//" -c "2,$$ sort u" -c update -c q
         :sys $VIM pt_PT.aff -u NONE -e -c "%s/\S\+=\S\+$$//" -c update -c q
@@ -80,8 +81,7 @@ pt_BR.aff pt_BR.dic: {buildcheck=}
         :delete {r}{f} META-INF
         :delete {f} README_en.TXT
         :delete {f} README_hyph_pt_BR.TXT
-        :sys $VIM README_pt_BR.TXT -u NONE -N -e -c "set ff=unix" -c update -c q
-        :move README_pt_BR.TXT README_pt_BR.txt
+        :sys $VIM README_pt_BR.txt -u NONE -N -e -c "set ff=unix" -c update -c q
 
         :sys $VIM pt_BR.dic -u NONE -N -e -c "set ff=unix" -c update -c q
         :sys $VIM pt_BR.aff -u NONE -N -e -c "set ff=unix" -c update -c q
